@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Marketplace</title>
+  <style>
+    body { font-family: Arial; margin: 0; background: #f5f5f5; }
+    header { background: #222; color: white; padding: 15px; text-align: center; }
+    .container { padding: 20px; }
+    .product { background: white; padding: 15px; margin: 10px; border-radius: 10px; display: inline-block; width: 200px; }
+    button { background: #28a745; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; }
+    input { padding: 8px; margin: 5px 0; width: 100%; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ma Marketplace</h1>
+</header>
+
+<div class="container">
+  <h2>Ajouter un produit</h2>
+  <input type="text" id="name" placeholder="Nom du produit">
+  <input type="number" id="price" placeholder="Prix (€)">
+  <button onclick="addProduct()">Ajouter</button>
+
+  <h2>Produits</h2>
+  <div id="products"></div>
+</div>
+
+<script>
+  let products = [];
+
+  function addProduct() {
+    const name = document.getElementById('name').value;
+    const price = document.getElementById('price').value;
+
+    if (!name || !price) return alert('Remplis tous les champs');
+
+    products.push({ name, price });
+    displayProducts();
+  }
+
+  function displayProducts() {
+    const container = document.getElementById('products');
+    container.innerHTML = '';
+
+    products.forEach((p, index) => {
+      container.innerHTML += `
+        <div class="product">
+          <h3>${p.name}</h3>
+          <p>${p.price} €</p>
+          <button onclick="buy(${index})">Acheter</button>
+        </div>
+      `;
+    });
+  }
+
+  function buy(index) {
+    alert('Produit acheté : ' + products[index].name);
+  }
+</script>
+
+</body>
+</html>
